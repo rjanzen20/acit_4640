@@ -52,4 +52,4 @@ setup_system () {
 }
 
 setup_system
-echo "VM Setup Complete."
+echo "VM Setup Complete!"
