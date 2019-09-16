@@ -1,22 +1,27 @@
 #!/bin/bash
 vboxmanage () { VBoxManage.exe "$@"; }
 
-VDI_PATH="C:\\Users\\rober\\VirtualBox VMs\\VM_ACIT4640\\VM_ACIT4640.vdi"
-ISO_PATH="C:\\Users\\rober\\VirtualBox VMs\\CentOS-7-x86_64-Minimal-1810.iso"
-BASE_FOLDER="C:\\Users\\rober\\VirtualBox VMs\\"
 VM_NAME="VM_ACIT4640"
+ISO_PATH="C:\\Users\\rober\\VirtualBox VMs\\CentOS-7-x86_64-Minimal-1810.iso"
 NAT_NET_NAME="net_4640"
 
 setup_system () {
-    vboxmanage createmedium disk \
-        --filename "${VDI_PATH}" \
-        --size 10000 \
-        --format VDI
+    echo "Configuring system."
+
     vboxmanage createvm \
         --name "${VM_NAME}" \
-        --basefolder "${BASE_FOLDER}" \
         --ostype RedHat_64 \
         --register
+
+    SED_PROGRAM="/^Config file:/ { s/^.*:\s\+\(\S\+\)/\1/; s|\\\\|/|gp }"
+    VBOX_PATH=$(vboxmanage showvminfo "${VM_NAME}" | sed -ne "${SED_PROGRAM}")
+    BASE_FOLDER=$(dirname "${VBOX_PATH}")
+
+    vboxmanage createmedium disk \
+        --filename "${BASE_FOLDER}/VM_ACIT4640.vdi" \
+        --size 10000 \
+        --format VDI
+
     vboxmanage storagectl "${VM_NAME}" \
         --name "IDE" \
         --add ide \
@@ -40,7 +45,7 @@ setup_system () {
         --type hdd \
         --port 0 \
         --device 0 \
-        --medium "${VDI_PATH}"
+        --medium "${BASE_FOLDER}/VM_ACIT4640.vdi"
     vboxmanage modifyvm "${VM_NAME}" \
         --cpus 1 \
         --memory 1024 \
