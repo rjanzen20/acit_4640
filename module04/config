@@ -1,0 +1,30 @@
+Host mypi
+	HostName 66.183.99.150
+	Port 2022
+	User rjanzen
+
+Host mypi-home
+	HostName 192.168.1.150
+	User rjanzen
+
+Host github.com
+	User git
+	IdentityFile ~/.ssh/rjanzen_id_rsa
+
+Host vm
+	Hostname localhost
+	Port 50022
+	ForwardAgent yes
+	IdentityFile ~/.ssh/acit_admin_id_rsa
+	User admin
+	StrictHostKeyChecking no
+	UserKnownHostsFile=/dev/null
+
+Host pxe
+	Hostname localhost
+	Port 50222
+	ForwardAgent yes
+	IdentityFile ~/.ssh/acit_admin_id_rsa
+	User admin
+	StrictHostKeyChecking no
+	UserKnownHostsFile=/dev/null

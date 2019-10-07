@@ -1,0 +1,8 @@
+Fri Oct  4 18:32:05 PDT 2019
+VBoxManage.exe: error: Code E_INVALIDARG (0x80070057) - One or more arguments are invalid (extended info not available)
+VBoxManage.exe: error: Context: "RemoveNATNetwork(net)" at line 475 of file VBoxManageNATNetwork.cpp
+VBoxManage.exe: error: Failed to remove nat network
+VBoxManage.exe: error: NATNetwork server already exists
+0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+Warning: Permanently added '[localhost]:50222' (ECDSA) to the list of known hosts.
