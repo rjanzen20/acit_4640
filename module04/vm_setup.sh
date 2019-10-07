@@ -1,4 +1,5 @@
 #!/bin/bash
+# Robert Janzen A01029341
 
 VM_NAME="VM_ACIT4640"
 PXE_NAME="PXE_4640"
@@ -116,20 +117,3 @@ create_network
 create_vm
 configure_pxe
 boot_vm
-
-# cd /var/lib/tftpboot/pxelinux/pxelinux
-# vim inst.ks=http://192.168.250.200/ks.cfg
-
-# Everything is logged in: %post --log=/mnt/sysimage/root/post-ks.log
-#
-#                   Kernel
-# /
-# /bin
-# /usr           ________
-# /mnt/sysimage | /      |
-#               | /bin   |
-#               | /usr   |
-#                _/root/_
-
-# Square is the final file system after installation
-# All the commands in the post section run within the future VM file system

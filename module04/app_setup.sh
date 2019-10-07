@@ -1,5 +1,5 @@
 #!/bin/bash
-# Place files in /var/www/lighttpd
+# Robert Janzen A01029341
 
 ENCRYPTED_PASSWORD="\$6\$kh3u.1TYYVhYgzmD\$ZzVSt6kHRmMjfb9vjyahT8P8hxCdq7hkChgnqMub8W4apZhG/lKch9KUR9S3Vmtq4SYFKlCc6WwrxErqV8Opa1"
 VM_NAME="VM_ACIT4640"
