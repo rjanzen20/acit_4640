@@ -11,6 +11,7 @@ NC="\033[0m"
 vboxmanage () { /mnt/c/Program\ Files/Oracle/VirtualBox/VBoxManage.exe "$@"; }
 
 clean_up() {
+    cp ./acit_admin_id_rsa ~/.ssh/
     cp ./config ~/.ssh/
     rm -f ./errors.log
     date > errors.log

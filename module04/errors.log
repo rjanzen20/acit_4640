@@ -1,12 +1,12 @@
-Mon Oct  7 11:11:42 PDT 2019
-VBoxManage.exe: error: Code E_INVALIDARG (0x80070057) - One or more arguments are invalid (extended info not available)
-VBoxManage.exe: error: Context: "RemoveNATNetwork(net)" at line 475 of file VBoxManageNATNetwork.cpp
-VBoxManage.exe: error: Failed to remove nat network
-VBoxManage.exe: error: NATNetwork server already exists
+Mon Oct  7 11:29:18 PDT 2019
+VBoxManage.exe: error: Could not find a registered machine named 'VM_ACIT4640'
+VBoxManage.exe: error: Details: code VBOX_E_OBJECT_NOT_FOUND (0x80bb0001), component VirtualBoxWrap, interface IVirtualBox, callee IUnknown
+VBoxManage.exe: error: Context: "FindMachine(Bstr(a->argv[0]).raw(), machine.asOutParam())" at line 382 of file VBoxManageControlVM.cpp
+VBoxManage.exe: error: Could not find a registered machine named 'VM_ACIT4640'
+VBoxManage.exe: error: Details: code VBOX_E_OBJECT_NOT_FOUND (0x80bb0001), component VirtualBoxWrap, interface IVirtualBox, callee IUnknown
+VBoxManage.exe: error: Context: "FindMachine(Bstr(VMName).raw(), machine.asOutParam())" at line 150 of file VBoxManageMisc.cpp
 0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
-0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
-0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
-0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+VBoxManage.exe: error: Machine 'PXE_4640' is not currently running
 Warning: Permanently added '[localhost]:50222' (ECDSA) to the list of known hosts.
 Warning: Permanently added '[localhost]:50222' (ECDSA) to the list of known hosts.
 Warning: Permanently added '[localhost]:50222' (ECDSA) to the list of known hosts.
