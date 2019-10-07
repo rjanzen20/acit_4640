@@ -32,7 +32,7 @@ configure_security() {
     echo -e "${GREEN}[+] Adding public key file to admin .ssh folder${NC}"
     mkdir /home/admin/.ssh
     chown -R admin:admin /home/admin/.ssh/
-    cp -f /root/acit_admin_id_rsa.pub /home/admin/.ssh/ 1> /dev/null
+    cp -f /tmp/acit_admin_id_rsa.pub /home/admin/.ssh/ 1> /dev/null
     chown admin:admin /home/admin/.ssh/acit_admin_id_rsa.pub
 }
 
@@ -57,17 +57,17 @@ setup_application() {
     npm install --prefix /home/todo-app/app/ 1> /dev/null
 
     echo -e "${GREEN}[+] Configuring MongoDB${NC}"
-    cp -f /root/database.js /home/todo-app/app/config/database.js 1> /dev/null
+    cp -f /tmp/database.js /home/todo-app/app/config/database.js 1> /dev/null
     systemctl enable mongod 1> /dev/null
     systemctl start mongod 1> /dev/null
 
     echo -e "${GREEN}[+] Configuring NGINX${NC}"
-    cp -f /root/nginx.conf /etc/nginx/nginx.conf 1> /dev/null
+    cp -f /tmp/nginx.conf /etc/nginx/nginx.conf 1> /dev/null
     systemctl enable nginx 1> /dev/null
     systemctl start nginx 1> /dev/null
 
     echo -e "${GREEN}[+] Configuring NodeJS daemon service${NC}"
-    cp -f /root/todoapp.service /lib/systemd/system/todoapp.service 1> /dev/null
+    cp -f /tmp/todoapp.service /lib/systemd/system/todoapp.service 1> /dev/null
     systemctl daemon-reload 1> /dev/null
     systemctl enable todoapp 1> /dev/null
     systemctl start todoapp 1> /dev/null

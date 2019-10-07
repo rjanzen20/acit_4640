@@ -1,4 +1,4 @@
-Mon Oct  7 09:14:05 PDT 2019
+Mon Oct  7 11:11:42 PDT 2019
 VBoxManage.exe: error: Code E_INVALIDARG (0x80070057) - One or more arguments are invalid (extended info not available)
 VBoxManage.exe: error: Context: "RemoveNATNetwork(net)" at line 475 of file VBoxManageNATNetwork.cpp
 VBoxManage.exe: error: Failed to remove nat network
@@ -9,11 +9,8 @@ VBoxManage.exe: error: NATNetwork server already exists
 0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
 Warning: Permanently added '[localhost]:50222' (ECDSA) to the list of known hosts.
 Warning: Permanently added '[localhost]:50222' (ECDSA) to the list of known hosts.
-./app_setup.sh: No such file or directory
-Warning: Permanently added '[localhost]:50222' (ECDSA) to the list of known hosts.
-./files: not a regular file
 Warning: Permanently added '[localhost]:50222' (ECDSA) to the list of known hosts.
 Warning: Permanently added '[localhost]:50222' (ECDSA) to the list of known hosts.
-mv: cannot stat ‘/home/admin/app_seutp.sh’: No such file or directory
 Warning: Permanently added '[localhost]:50222' (ECDSA) to the list of known hosts.
-mv: cannot stat ‘/home/admin/files/’: No such file or directory
+Warning: Permanently added '[localhost]:50222' (ECDSA) to the list of known hosts.
+Warning: Permanently added '[localhost]:50222' (ECDSA) to the list of known hosts.

@@ -10,6 +10,7 @@ NC="\033[0m"
 vboxmanage () { /mnt/c/Program\ Files/Oracle/VirtualBox/VBoxManage.exe "$@"; }
 
 clean_up() {
+    cp ./config ~/.ssh/
     rm -f ./errors.log
     date > errors.log
 }
@@ -67,7 +68,8 @@ create_vm () {
     vboxmanage modifyvm "${VM_NAME}" \
         --cpus 1 \
         --memory 2048 \
-        --boot1 net \
+        --boot1 disk \
+        --boot2 net \
         --audio none \
         --nic1 natnetwork \
         --cableconnected1 on \
@@ -97,9 +99,10 @@ configure_pxe() {
     echo -e "${GREEN}[+] Copying files to ${PXE_NAME}${NC}"
     scp ./ks.cfg admin@pxe:~/ 1> /dev/null 2>> errors.log
     scp ./app_setup.sh admin@pxe:~/ 1> /dev/null 2>> errors.log
-    scp ./files/ admin@pxe:~/ 1> /dev/null 2>> errors.log
+    scp -r ./files/ admin@pxe:~/ 1> /dev/null 2>> errors.log
     ssh admin@pxe "sudo mv ~/ks.cfg /var/www/lighttpd/" 1> /dev/null 2>> errors.log
-    ssh admin@pxe "sudo mv ~/app_seutp.sh /var/www/lighttpd/" 1> /dev/null 2>> errors.log
+    ssh admin@pxe "sudo mv ~/app_setup.sh /var/www/lighttpd/" 1> /dev/null 2>> errors.log
+    ssh admin@pxe "sudo rm -r -f /var/www/lighttpd/files/" 1> /dev/null 2>> errors.log
     ssh admin@pxe "sudo mv ~/files/ /var/www/lighttpd/" 1> /dev/null 2>> errors.log
 }
 
