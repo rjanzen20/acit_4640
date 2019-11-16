@@ -1,0 +1,106 @@
+---
+- hosts: todoapp
+  vars:
+    password: $6$kh3u.1TYYVhYgzmD$ZzVSt6kHRmMjfb9vjyahT8P8hxCdq7hkChgnqMub8W4apZhG/lKch9KUR9S3Vmtq4SYFKlCc6WwrxErqV8Opa1
+  tasks:
+    - name: Disable SELinux
+      become: yes
+      selinux:
+        state: disabled
+    - name: Create todoapp user
+      become: yes
+      user:
+        name: todoapp
+        password: "{{ password }}"
+    - name: Clone git repository
+      become: yes
+      git:
+        repo: 'https://github.com/timoguic/ACIT4640-todo-app.git'
+        dest: /home/todoapp/app
+    - name: Copy the mongodb config file
+      become: yes
+      copy:
+        src: ../files/database.js
+        dest: /home/todoapp/app/config/database.js
+    - name: NPM install
+      become: yes
+      shell: npm install
+      args:
+        chdir: /home/todoapp/app/
+    - name: Change ownership of todoapp public directory
+      become: yes
+      file:
+        path: /home/todoapp/
+        recurse: yes
+        owner: todoapp
+        group: todoapp
+        mode: '0755'
+    - name: Change permissions of todoapp directory
+      become: yes
+      file:
+        path: /home/todoapp/
+        mode: '0755'
+    - name: Enable http through firewall
+      become: yes
+      firewalld:
+        service: http
+        immediate: yes
+        permanent: yes
+        state: enabled
+    - name: Enable https through firewall
+      become: yes
+      firewalld:
+        service: https
+        immediate: yes
+        permanent: yes
+        state: enabled
+    - name: Enable SSH through firewall
+      become: yes
+      firewalld:
+        service: ssh
+        immediate: yes
+        permanent: yes
+        state: enabled
+    - name: Install nginx
+      become: yes
+      package:
+        name: nginx
+        state: installed
+    - name: Copy the nginx config file
+      become: yes
+      template:
+        src: ../files/nginx.conf
+        dest: /etc/nginx/nginx.conf
+    - name: Install mongodb
+      become: yes
+      package:
+        name: mongodb-server
+        state: installed
+    - name: Copy todoapp service file
+      become: yes
+      copy:
+        src: ../files/todoapp.service
+        dest: /lib/systemd/system/todoapp.service
+    - name: Install git
+      become: yes
+      package:
+        name: git
+        state: installed
+    - name: Enables and start nginx
+      become: yes
+      service:
+        name: nginx
+        enabled: yes
+        state: started
+    - name: Enables and start mongod
+      become: yes
+      service:
+        name: mongod
+        enabled: yes
+        state: started
+    - name: Enables and start todoapp
+      become: yes
+      service:
+        name: todoapp
+        enabled: yes
+        state: started
