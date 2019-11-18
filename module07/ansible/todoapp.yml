@@ -12,17 +12,27 @@
       user:
         name: todoapp
         password: "{{ password }}"
-    - name: Clone git repository
+    - name: Install Git
+      become: yes
+      package:
+        name: git
+        state: installed
+    - name: Install Node
+      become: yes
+      package:
+        name: npm
+        state: installed
+    - name: Clone Git repository
       become: yes
       git:
         repo: 'https://github.com/timoguic/ACIT4640-todo-app.git'
         dest: /home/todoapp/app
-    - name: Copy the mongodb config file
+    - name: Copy the Mongodb config file
       become: yes
       copy:
         src: ../files/database.js
         dest: /home/todoapp/app/config/database.js
-    - name: NPM install
+    - name: NPM install todoapp
       become: yes
       shell: npm install
       args:
@@ -35,11 +45,6 @@
         owner: todoapp
         group: todoapp
         mode: '0755'
-    - name: Change permissions of todoapp directory
-      become: yes
-      file:
-        path: /home/todoapp/
-        mode: '0755'
     - name: Enable http through firewall
       become: yes
       firewalld:
@@ -51,13 +56,6 @@
       become: yes
       firewalld:
         service: https
-        immediate: yes
-        permanent: yes
-        state: enabled
-    - name: Enable SSH through firewall
-      become: yes
-      firewalld:
-        service: ssh
         immediate: yes
         permanent: yes
         state: enabled
@@ -81,11 +79,6 @@
       copy:
         src: ../files/todoapp.service
         dest: /lib/systemd/system/todoapp.service
-    - name: Install git
-      become: yes
-      package:
-        name: git
-        state: installed
     - name: Enables and start nginx
       become: yes
       service:
