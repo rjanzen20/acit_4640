@@ -1,0 +1,5 @@
+---
+root_url: /home/todoapp/app/public
+proxy_location: /api/todos
+proxy_address: localhost
+proxy_port: 8080

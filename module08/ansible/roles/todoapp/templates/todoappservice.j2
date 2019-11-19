@@ -1,0 +1,14 @@
+[Unit]
+Description={{service_description}}
+After=network.target
+
+[Service]
+Environment=NODE_PORT={{todoapp_port}}
+WorkingDirectory={{app_url}}
+Type=simple
+User=todoapp
+ExecStart=/usr/bin/node {{app_url}}/server.js
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

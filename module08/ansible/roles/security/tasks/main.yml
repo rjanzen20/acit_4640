@@ -1,0 +1,7 @@
+---
+- name: Disable SELinux
+  become: yes
+  selinux:
+    state: disabled
+- name: Apply firewall rules 
+  include_tasks: firewall.yml

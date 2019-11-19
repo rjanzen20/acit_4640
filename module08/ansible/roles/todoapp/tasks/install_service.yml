@@ -1,0 +1,6 @@
+---
+- name: Copy todoapp service file
+  become: yes
+  template:
+    src: todoappservice.j2
+    dest: "{{service_url}}/todoapp.service"

@@ -1,0 +1,44 @@
+---
+- name: Create todoapp user
+  become: yes
+  user:
+    name: todoapp
+    password: "{{ password }}"
+- name: Clone Git repository
+  become: yes
+  git:
+    repo: "{{ repo_url }}"
+    dest: "{{ app_url }}"
+    update: yes
+- name: NPM install todoapp
+  become: yes
+  shell: npm install
+  args:
+    chdir: "{{ app_url }}/"
+- name: Copy the Mongodb config file
+  become: yes
+  template:
+    src: database.j2
+    dest: "{{appconfig_url}}/database.js"
+- name: Change ownership of todoapp public directory
+  become: yes
+  file:
+    path: "{{ todoapp_url }}"
+    recurse: yes
+    owner: todoapp
+    group: todoapp
+    mode: '0755'
+- name: Restart NGINX
+  become: yes
+  service:
+    name: nginx
+    enabled: yes
+    state: restarted
+- name: Install todoapp service
+  include_tasks: install_service.yml
+- name: Enables and start todoapp
+  become: yes
+  service:
+    name: todoapp
+    enabled: yes
+    state: started

@@ -1,0 +1,15 @@
+---
+- name: Firewall enable port 80
+  become: yes
+  firewalld:
+    service: http
+    immediate: yes
+    permanent: yes
+    state: enabled
+- name: Firewall enable port 443
+  become: yes
+  firewalld:
+    service: https
+    immediate: yes
+    permanent: yes
+    state: enabled
